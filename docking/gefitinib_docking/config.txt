@@ -1,0 +1,13 @@
+receptor = egfr_clean.pdbqt
+ligand = gefitinib.pdbqt
+
+center_x = 22.014
+center_y = 0.253
+center_z = 52.794
+
+size_x = 20
+size_y = 20
+size_z = 20
+
+out = gefitinib_out.pdbqt
+log = docking_log.txt
