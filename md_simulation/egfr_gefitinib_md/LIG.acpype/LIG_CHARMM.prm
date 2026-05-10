@@ -1,0 +1,115 @@
+* Force Field Parameter File.
+* 
+
+BOND
+ca cl  305.60   1.750
+ca f   357.80   1.349
+os c6    0.00   0.000	!ATTN, need revision
+os c6    0.00   0.000
+c3 os  308.60   1.432
+ca os  376.60   1.370
+c3 n3  325.90   1.465
+n3 c6    0.00   0.000
+nu ca  417.90   1.386	! same as  ca nh
+nu ca  417.90   1.386
+nu hn  404.60   1.012	! same as  hn nh
+ca nb  488.00   1.339
+c3 c3  300.90   1.538
+c3 h1  330.60   1.097
+c6 h1    0.00   0.000
+c6 c6    0.00   0.000
+c3 hc  330.60   1.097
+ca ca  461.10   1.398
+ca ha  345.80   1.086
+ca h5  343.20   1.088
+
+ANGLE
+cl ca ca   57.900     119.390
+f  ca ca   67.100     118.960
+os c6 h1    0.000       0.000
+os c6 c6    0.000       0.000
+os c3 c3   68.000     107.970
+os c3 h1   50.800     109.780
+os ca ca   69.600     119.200
+n3 c3 c3   66.000     111.040
+n3 c3 h1   49.500     109.880
+n3 c6 h1    0.000       0.000
+n3 c6 c6    0.000       0.000
+nu ca nb   72.700     116.940	! same as nb ca nh
+nu ca ca   68.300     120.950	! same as ca ca nh
+nu ca ca   68.300     120.950
+nb ca ca   68.800     122.940
+nb ca nb   70.900     127.260
+nb ca h5   51.900     115.820
+c3 n3 c6    0.000       0.000
+c3 c3 c3   62.900     111.510
+c3 c3 hc   46.300     109.800
+c6 c6 h1    0.000       0.000
+c3 c3 h1   46.400     109.560
+c3 os ca   62.500     117.960
+ca ca ca   66.600     120.020
+ca ca ha   48.200     119.880
+ca nb ca   68.300     117.220
+ca nu ca   63.300     127.460	! same as ca nh ca
+ca nu hn   48.400     116.070	! same as ca nh hn
+ca nu hn   48.400     116.070
+h1 c3 h1   39.200     108.460
+h1 c6 h1    0.000       0.000
+hc c3 hc   39.400     107.580
+
+DIHEDRAL
+c6 os c6 h1      -nan         0       0.0
+c6 os c6 c6      -nan         0       0.0
+X  c3 os X      0.383         3       0.0
+X  ca os X      0.900         2     180.0
+X  c3 n3 X      0.300         3       0.0
+c3 n3 c6 h1      -nan         0       0.0
+c6 n3 c6 h1      -nan         0       0.0
+c3 n3 c6 c6      -nan         0       0.0
+c6 n3 c6 c6      -nan         0       0.0
+ca nu ca nb     1.050         2     180.0      ! same as X  ca nh X 
+hn nu ca nb     1.050         2     180.0      ! same as X  ca nh X 
+ca nu ca ca     1.050         2     180.0      ! same as X  ca nh X 
+hn nu ca ca     1.050         2     180.0      ! same as X  ca nh X 
+X  ca nb X      4.800         2     180.0
+X  c3 c3 X      0.156         3       0.0
+h1 c6 c6 os      -nan         0       0.0
+h1 c6 c6 h1      -nan         0       0.0
+n3 c6 c6 h1      -nan         0       0.0
+n3 c6 c6 os      -nan         0       0.0
+hc c3 c3 os     0.000         3       0.0
+hc c3 c3 os     0.250         1       0.0
+X  ca ca X      3.625         2     180.0
+
+IMPHI
+ca ca nu hn     1.100         2     180.0	! Using default value
+ca ca ca os     1.100         2     180.0	! Using default value
+ca ca ca ca     1.100         2     180.0	! Using default value
+X  X  ca ha     1.100         2     180.0
+ca ca ca nb     1.100         2     180.0	! Using default value
+ca nb ca nu     1.100         2     180.0	! Using default value
+ca ca ca nu     1.100         2     180.0	! Using default value
+h5 nb ca nb     1.100         2     180.0	! Using default value
+ca ca ca cl     1.100         2     180.0
+ca ca ca f      1.100         2     180.0
+
+NONBONDED  NBXMOD 5  GROUP SWITCH CDIEL -
+CUTNB 14.0  CTOFNB 12.0  CTONNB 10.0  EPS 1.0  E14FAC 0.83333333  WMIN 1.4
+!                Emin     Rmin/2              Emin/2     Rmin  (for 1-4's)
+!             (kcal/mol)    (A)
+cl      0.00   -0.2650    1.9480      0.00   -0.1325    1.9480
+ f      0.00   -0.0610    1.7500      0.00   -0.0305    1.7500
+os      0.00   -0.1700    1.6837      0.00   -0.0850    1.6837
+n3      0.00   -0.1700    1.8240      0.00   -0.0850    1.8240
+nu      0.00   -0.1700    1.8240      0.00   -0.0850    1.8240
+      ! same as nh 
+nb      0.00   -0.1700    1.8240      0.00   -0.0850    1.8240
+c3      0.00   -0.1094    1.9080      0.00   -0.0547    1.9080
+c6      0.00    0.0000    0.0000      0.00    0.0000    0.0000
+c6      0.00   -0.0000    0.0000      0.00   -0.0000    0.0000
+ca      0.00   -0.0860    1.9080      0.00   -0.0430    1.9080
+h1      0.00   -0.0157    1.3870      0.00   -0.0078    1.3870
+hc      0.00   -0.0157    1.4870      0.00   -0.0078    1.4870
+ha      0.00   -0.0150    1.4590      0.00   -0.0075    1.4590
+hn      0.00   -0.0157    0.6000      0.00   -0.0078    0.6000
+h5      0.00   -0.0150    1.3590      0.00   -0.0075    1.3590
