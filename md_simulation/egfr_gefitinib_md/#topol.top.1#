@@ -2,7 +2,7 @@
 ;	File 'topol.top' was generated
 ;	By user: niper (1000)
 ;	On host: niper-k
-;	At date: Sun May 10 09:27:28 2026
+;	At date: Mon May 11 10:40:23 2026
 ;
 ;	This is a standalone topology file
 ;
@@ -11,9 +11,9 @@
 ;	
 ;	Executable:   /usr/local/gromacs/bin/gmx
 ;	Data prefix:  /usr/local/gromacs
-;	Working dir:  /home/niper/Desktop/aarya/Arya_projects/EGFR-computational-drug-discovery-pipeline/md_simulation/egfr_gefitinib_md
+;	Working dir:  /home/niper/Desktop/aarya/Arya_projects/EGFR-computational-drug-discovery-pipeline/md_simulation/egfr_gefitinib_md/clean
 ;	Command line:
-;	  gmx pdb2gmx -f protein.pdb -o protein_processed.gro -water tip3p -ignh
+;	  gmx pdb2gmx -f protein.pdb -o protein.gro -ignh
 ;	Force field data was read from:
 ;	/home/niper/miniconda3/envs/pmx3/lib/python3.10/site-packages/pmx/data/mutff
 ;
@@ -25,8 +25,7 @@
 
 ; Include forcefield parameters
 #include "/home/niper/miniconda3/envs/pmx3/lib/python3.10/site-packages/pmx/data/mutff/charmm36m-mut.ff/forcefield.itp"
-#include "LIG_GMX.itp"
-
+#include "lig1.itp"
 [ moleculetype ]
 ; Name            nrexcl
 Protein_chain_A     3
@@ -47729,4 +47728,4 @@ Protein
 [ molecules ]
 ; Compound        #mols
 Protein_chain_A     1
-LIG                 1
+LIG1                1

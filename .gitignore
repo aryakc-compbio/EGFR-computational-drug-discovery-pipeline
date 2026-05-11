@@ -1,9 +1,27 @@
-__pycache__/
-*.pyc
-*.log
-*.tpr
-*.trr
+# GROMACS heavy files
 *.xtc
+*.trr
 *.edr
 *.cpt
+*.tpr
 
+# Logs
+*.log
+
+# Backup/editor files
+#*
+*~
+
+# MM-PBSA temporary files
+_GMXMMPBSA_*
+*.mdcrd.*
+*.inpcrd
+*.restrt.*
+
+# Cache/results archives
+*.tar.gz
+*.h5
+
+# Optional
+MATCH/
+MMFF/

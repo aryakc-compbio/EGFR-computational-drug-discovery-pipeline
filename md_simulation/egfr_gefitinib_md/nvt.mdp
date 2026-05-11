@@ -27,11 +27,11 @@ pme_order               = 4
 fourierspacing          = 0.16
 
 tcoupl                  = V-rescale
-tc-grps                 = Protein_LIG Water_and_ions
+tc-grps                 = Protein_LIG1 Water_and_ions
 tau_t                   = 0.1     0.1
 ref_t                   = 300     300
 
-pcoupl                  = no
+pcoupl                  = No
 
 pbc                     = xyz
 

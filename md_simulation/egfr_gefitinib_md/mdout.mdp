@@ -2,16 +2,16 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: niper (1000)
 ;	On host: niper-k
-;	At date: Sun May 10 12:30:23 2026
+;	At date: Mon May 11 12:31:44 2026
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2023.3 (-:
 ;	
 ;	Executable:   /usr/local/gromacs/bin/gmx
 ;	Data prefix:  /usr/local/gromacs
-;	Working dir:  /home/niper/Desktop/aarya/Arya_projects/EGFR-computational-drug-discovery-pipeline/md_simulation/egfr_gefitinib_md
+;	Working dir:  /home/niper/Desktop/aarya/Arya_projects/EGFR-computational-drug-discovery-pipeline/md_simulation/egfr_gefitinib_md/clean
 ;	Command line:
-;	  gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md.tpr
+;	  gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -n index.ndx -o md.tpr -maxwarn 1
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -171,7 +171,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen_vel                  = no
 gen-temp                 = 300
-gen-seed                 = -167821314
+gen-seed                 = -140623985
 
 ; OPTIONS FOR BONDS    
 constraints              = h-bonds
