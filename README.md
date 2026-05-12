@@ -14,4 +14,4 @@ Integrated computational biology and molecular modeling workflow for EGFR.
 - Protein–ligand interaction analysis
 
 ## Tools
-Python, Biopython, GROMACS, AutoDock Vina, PyMOL, Linux, GMXMMPBSA tool
+Python, Biopython, GROMACS, AutoDock Vina, PyMOL, Linux, gmx_MMPBSA tool
