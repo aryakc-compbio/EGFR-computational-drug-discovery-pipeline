@@ -1,0 +1,195 @@
+# Notebook Markdown Cells — EGFR Pipeline
+Copy each section below into the top of the corresponding notebook as a markdown cell.
+
+---
+
+## FOR: uniprot_analysis / biopython_scripts notebooks
+
+```
+# Stage 1: UniProt Sequence Retrieval and Annotation
+
+**Target:** EGFR (Epidermal Growth Factor Receptor) — UniProt accession P00533  
+**Output:** Canonical FASTA sequence, domain annotations, known variants  
+**Why:** Confirms the target sequence and retrieves functional domain information
+before structural work.
+
+Key information retrieved:
+- Full sequence length: 1210 amino acids
+- Kinase domain: residues ~712-979
+- Known oncogenic mutations: L858R (activating), T790M (resistance)
+```
+
+---
+
+## FOR: pdb_analysis notebook
+
+```
+# Stage 2: PDB Structure Analysis
+
+**Input:** EGFR PDB structure  
+**Output:** Parsed structure, chain information, ligand identification  
+**Why:** Selects the appropriate crystal structure for docking — confirms the
+kinase domain is resolved and the ATP-binding pocket is accessible.
+
+Note the PDB ID used and why it was selected (resolution, wild-type vs mutant,
+presence of co-crystallised ligand).
+```
+
+---
+
+## FOR: blast_alignment notebook
+
+```
+# Stage 3: BLAST Homology Search
+
+**Input:** EGFR kinase domain sequence  
+**Output:** Homologous sequences with identity scores  
+**Why:** Identifies related kinases and confirms sequence conservation in the
+ATP-binding pocket. Informs which residues are functionally critical and
+reliable docking targets.
+
+Top hits retained for MSA: sequences with >40% identity to EGFR kinase domain.
+```
+
+---
+
+## FOR: msa_analysis notebook
+
+```
+# Stage 4: Multiple Sequence Alignment (ClustalW)
+
+**Input:** BLAST hit sequences (FASTA)  
+**Output:** Multiple sequence alignment, conservation map  
+**Why:** Highlights conserved residues across EGFR homologs. Conserved residues
+are functionally important and less likely to tolerate mutation.
+
+Key conserved residues identified in the ATP-binding region:
+Val702, Lys721, Ala719, Met769 — the same residues later confirmed as key
+contacts in the gefitinib docking interaction analysis.
+```
+
+---
+
+## FOR: chembl_analysis notebook
+
+```
+# Stage 5: ChEMBL Bioactivity Mining
+
+**Target:** EGFR — ChEMBL ID: CHEMBL203  
+**Output:** Filtered bioactivity dataset (IC50 values), potency distribution  
+**Why:** Retrieves experimentally validated EGFR inhibitors with measured
+potency to inform ligand selection and provide context for docking results.
+
+Filters applied:
+- Assay type: Binding (B) or Functional (F)
+- Standard type: IC50, units: nM
+- Removed entries with missing or ambiguous values
+
+Reference: Gefitinib (CHEMBL939) IC50 against EGFR ~0.02 uM — confirms it
+as a high-affinity reference compound for this pipeline.
+```
+
+---
+
+## FOR: docking notebook
+
+```
+# Stage 6: Molecular Docking — Gefitinib and Erlotinib vs EGFR
+
+**Tool:** AutoDock Vina  
+**Input:** Prepared EGFR receptor (PDBQT), ligands (PDBQT), docking box
+centred on ATP-binding pocket  
+**Output:** Ranked docking poses, binding affinity scores
+
+## Results
+
+| Ligand     | Binding Affinity (kcal/mol) |
+|------------|----------------------------|
+| Gefitinib  | -8.3                       |
+| Erlotinib  | -7.5                       |
+
+Gefitinib showed stronger predicted binding. Its top-ranked pose was
+selected for MD simulation.
+
+## Key Interactions (BIOVIA Discovery Studio 2D diagram)
+
+Gefitinib contacts in the EGFR ATP-binding pocket:
+- Val702 — hydrophobic contact
+- Lys721 — hydrogen bond / electrostatic interaction
+- Ala719 — hydrophobic contact
+- Met769 — hydrogen bond at the hinge region
+
+Met769 is a hinge residue adjacent to the gatekeeper position — hydrogen
+bonding here is consistent with the published gefitinib binding mode in
+EGFR crystal structures.
+```
+
+---
+
+## FOR: md_simulation notebook
+
+```
+# Stage 7: Molecular Dynamics Simulation — EGFR-Gefitinib Complex
+
+**Tool:** GROMACS  
+**Input:** Top-ranked docking pose of gefitinib in EGFR  
+**Run length:** 1 ns (exploratory — assesses initial binding stability;
+not intended for convergence analysis)
+
+## Protocol
+1. System setup: protein + ligand in TIP3P water box, 1.0 nm padding,
+   Na+/Cl- ions to neutralise charge
+2. Energy minimisation (steepest descent)
+3. NVT equilibration (300 K, 100 ps)
+4. NPT equilibration (1 bar, 100 ps)
+5. Production MD (1 ns)
+
+## Note on run length
+1 ns is a short simulation. Results are used here to demonstrate pipeline
+continuity and assess whether the docking pose is stable under solvated
+conditions. Extended simulations would be needed for rigorous conformational
+sampling or reliable free energy estimates.
+```
+
+---
+
+## FOR: results / mm-gbsa notebook
+
+```
+# Stage 8: MM-GBSA Binding Free Energy Estimation
+
+**Tool:** gmx_MMPBSA  
+**Input:** MD trajectory of EGFR-gefitinib complex  
+**Output:** Estimated binding free energy (delta G bind)
+
+## Result
+
+| System           | delta G bind (kcal/mol) |
+|------------------|------------------------|
+| EGFR-Gefitinib   | -20.34                 |
+
+The negative value confirms thermodynamically favourable binding, consistent
+with the docking result (-8.3 kcal/mol) and with gefitinib's known high
+potency against wild-type EGFR.
+
+Caveat: MM-GBSA values from a 1 ns trajectory carry uncertainty due to
+limited sampling. Interpret as indicative rather than definitive.
+```
+
+---
+
+## Summary Table (add to any overview or final notebook)
+
+```
+| Stage              | Tool            | Key Output                                      |
+|--------------------|-----------------|------------------------------------------------|
+| Sequence retrieval | UniProt, Biopython | EGFR sequence, kinase domain annotated       |
+| Structure analysis | PDB, Biopython  | Crystal structure selected for docking          |
+| Homology search    | BLAST           | Conserved kinase family members identified      |
+| MSA                | ClustalW        | ATP-binding pocket residues confirmed conserved |
+| Bioactivity mining | ChEMBL, RDKit   | Gefitinib confirmed as high-affinity reference  |
+| Docking            | AutoDock Vina   | Gefitinib -8.3 kcal/mol; contacts Val702,       |
+|                    |                 | Lys721, Ala719, Met769                          |
+| MD simulation      | GROMACS         | 1 ns exploratory run; complex stable            |
+| Binding free energy| gmx_MMPBSA      | delta G = -20.34 kcal/mol                       |
+```
