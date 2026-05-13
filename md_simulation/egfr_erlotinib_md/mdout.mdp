@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: niper (1000)
 ;	On host: niper-k
-;	At date: Tue May 12 11:52:28 2026
+;	At date: Tue May 12 12:52:51 2026
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2023.3 (-:
@@ -11,21 +11,21 @@
 ;	Data prefix:  /usr/local/gromacs
 ;	Working dir:  /home/niper/Desktop/aarya/Arya_projects/EGFR-computational-drug-discovery-pipeline/md_simulation/egfr_erlotinib_md
 ;	Command line:
-;	  gmx grompp -f npt.mdp -c nvt.gro -r nvt.gro -t nvt.cpt -p topol.top -n index.ndx -o npt.tpr -maxwarn 3
+;	  gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -n index.ndx -o md.tpr -maxwarn 1
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
 ; e.g.: -I/home/joe/doe -I/home/mary/roe
 include                  = 
 ; e.g.: -DPOSRES -DFLEXIBLE (note these variable names are case sensitive)
-define                   = -DPOSRES
+define                   = 
 
 ; RUN CONTROL PARAMETERS
 integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.002
-nsteps                   = 50000
+nsteps                   = 2500000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -61,15 +61,15 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 1000
-nstvout                  = 1000
+nstxout                  = 0
+nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
 nstlog                   = 1000
 nstcalcenergy            = 100
 nstenergy                = 1000
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 0
+nstxout-compressed       = 1000
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -140,10 +140,10 @@ print-nose-hoover-chain-variables = no
 ; Groups to couple separately
 tc-grps                  = Protein Non-Protein
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 0.1     0.1
-ref_t                    = 300     300
+tau_t                    = 0.1 0.1
+ref_t                    = 300 300
 ; pressure coupling     
-pcoupl                   = Berendsen
+pcoupl                   = Parrinello-Rahman
 pcoupltype               = isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
@@ -171,7 +171,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen_vel                  = no
 gen-temp                 = 300
-gen-seed                 = -211813127
+gen-seed                 = 1006600143
 
 ; OPTIONS FOR BONDS    
 constraints              = h-bonds
