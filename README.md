@@ -46,6 +46,58 @@ UniProt/PDB → BLAST → MSA (ClustalW) → ChEMBL mining → Docking (AutoDock
 
 ## Key Results
 
+### Protein Structure Assessment Before Docking
+
+### Structure Selection
+
+The EGFR kinase domain crystal structure (PDB ID: 1M17) was selected for molecular docking and molecular dynamics studies.
+
+### Missing Residue Analysis
+
+Prior to receptor preparation, the PDB structure was inspected for unresolved residues using the `REMARK 465` section of the PDB file.
+
+The following missing residues were identified:
+
+* Residues 666–671
+* Residues 965–976
+* Residues 996–998
+
+### Binding Pocket Assessment
+
+The co-crystallized inhibitor (AQ4, Erlotinib) was used to identify the ligand-binding pocket. Residues within 5 Å of the ligand were examined using PyMOL.
+
+Key binding-site residues included:
+
+* LEU694
+* GLY695
+* VAL702
+* ALA719
+* LYS721
+* GLU738
+* MET742
+* LEU764
+* ILE765
+* THR766
+* GLN767
+* LEU768
+* MET769
+* PRO770
+* PHE771
+* GLY772
+* CYS773
+* LEU820
+* THR830
+* ASP831
+
+### Decision on Structure Repair
+
+Comparison of the missing residues with the ligand-binding pocket showed that all unresolved residues were located outside the active-site region and did not participate in ligand interactions.
+
+Therefore, missing-residue reconstruction was not performed, as it was unlikely to influence docking accuracy or binding-site geometry. The experimentally resolved structure was used directly for receptor preparation and subsequent docking studies.
+
+This assessment ensured that protein preparation decisions were based on structural and functional relevance rather than automatic residue reconstruction.
+
+
 ### Molecular Docking
 Two clinically approved EGFR inhibitors were docked against the EGFR kinase domain crystal structure (PDB: 1IVO or equivalent):
 
